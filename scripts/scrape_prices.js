@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * scotland-sky — Collecte des vrais prix via Playwright + Chrome
- * Sources : Carrefour, Intermarché, Cdiscount, La Maison du Whisky
+ * Sources : Carrefour Drive Lons-le-Saunier, Intermarché Morez, Cdiscount, LMDW
  */
 
 const { chromium } = require('playwright-core');
@@ -12,20 +12,23 @@ const { execSync } = require('child_process');
 const DATA_FILE = path.join(__dirname, '..', 'data', 'prices.json');
 
 const WHISKIES = [
-  { name: "Ardbeg 10 ans",                  query: "ardbeg 10 ans",              brand: "ardbeg" },
-  { name: "Lagavulin 16 ans",               query: "lagavulin 16 ans",            brand: "lagavulin" },
-  { name: "Lagavulin 8 ans",                query: "lagavulin 8 ans",             brand: "lagavulin" },
-  { name: "Laphroaig 10 ans",               query: "laphroaig 10 ans",            brand: "laphroaig" },
-  { name: "Caol Ila 12 ans",               query: "caol ila 12 ans",             brand: "caol ila" },
-  { name: "Bowmore 12 ans",                query: "bowmore 12 ans",              brand: "bowmore" },
-  { name: "Big Peat",                      query: "big peat whisky",             brand: "big peat" },
-  { name: "Bunnahabhain 12 ans",           query: "bunnahabhain 12 ans",         brand: "bunnahabhain" },
-  { name: "Highland Park 12 ans",          query: "highland park 12 ans",        brand: "highland park" },
-  { name: "Talisker 10 ans",               query: "talisker 10 ans",             brand: "talisker" },
-  { name: "Caol Ila 12 ans Signatory",     query: "caol ila signatory",          brand: "caol ila" },
-  { name: "Bunnahabhain Staoisha Signatory", query: "bunnahabhain staoisha signatory", brand: "bunnahabhain" },
-  { name: "Laphroaig 10 ans Signatory",    query: "laphroaig signatory",         brand: "laphroaig" },
-  { name: "Ardbeg Signatory",              query: "ardbeg signatory vintage",    brand: "ardbeg" },
+  { name: "Ardbeg 10 ans",                   query: "ardbeg 10 ans",                   brand: "ardbeg",       mustContain: null },
+  { name: "Lagavulin 16 ans",                query: "lagavulin 16 ans",                 brand: "lagavulin",    mustContain: null },
+  { name: "Lagavulin 8 ans",                 query: "lagavulin 8 ans",                  brand: "lagavulin",    mustContain: null },
+  { name: "Laphroaig 10 ans",                query: "laphroaig 10 ans",                 brand: "laphroaig",    mustContain: null },
+  { name: "Caol Ila 12 ans",                 query: "caol ila 12 ans",                  brand: "caol ila",     mustContain: null },
+  { name: "Bowmore 12 ans",                  query: "bowmore 12 ans",                   brand: "bowmore",      mustContain: null },
+  { name: "Big Peat",                        query: "big peat whisky",                  brand: "big peat",     mustContain: null },
+  { name: "Bunnahabhain 12 ans",             query: "bunnahabhain 12 ans",              brand: "bunnahabhain", mustContain: null },
+  { name: "Highland Park 12 ans",            query: "highland park 12 ans",             brand: "highland park",mustContain: null },
+  { name: "Talisker 10 ans",                 query: "talisker 10 ans",                  brand: "talisker",     mustContain: null },
+  { name: "Kilchoman Machir Bay",             query: "kilchoman machir bay",             brand: "kilchoman",    mustContain: null },
+  { name: "Kilchoman Sanaig",                query: "kilchoman sanaig",                 brand: "kilchoman",    mustContain: null },
+  // Signatory — mustContain obligatoire : filtre les résultats sans "signatory" dans le nom
+  { name: "Caol Ila 12 ans Signatory",       query: "caol ila signatory vintage",       brand: "caol ila",     mustContain: "signatory" },
+  { name: "Bunnahabhain Staoisha Signatory", query: "bunnahabhain staoisha signatory",  brand: "bunnahabhain", mustContain: "signatory" },
+  { name: "Laphroaig 10 ans Signatory",      query: "laphroaig signatory vintage",      brand: "laphroaig",    mustContain: "signatory" },
+  { name: "Ardbeg Signatory",                query: "ardbeg signatory vintage",         brand: "ardbeg",       mustContain: "signatory" },
 ];
 
 function parsePrice(text) {
@@ -38,13 +41,31 @@ function parsePrice(text) {
   return null;
 }
 
-function matchesBrand(name, brand) {
+/**
+ * Vérifie que le nom du produit correspond au whisky recherché :
+ * - La marque (brand) doit être présente
+ * - Si mustContain (ex: "signatory") → doit être dans le nom
+ * - Si PAS mustContain → "signatory" ne doit PAS être dans le nom (évite les faux positifs)
+ */
+function matchesBrand(name, whisky) {
   if (!name) return false;
   const n = name.toLowerCase();
-  return brand.toLowerCase().split(' ').every(w => n.includes(w));
+  // Marque présente ?
+  if (!whisky.brand.toLowerCase().split(' ').every(w => n.includes(w))) return false;
+  // Whisky Signatory : le mot "signatory" doit être dans le nom retourné
+  if (whisky.mustContain && !n.includes(whisky.mustContain.toLowerCase())) {
+    console.log(`  ↳ Rejeté (pas "${whisky.mustContain}" dans "${name}")`);
+    return false;
+  }
+  // Whisky normal : rejeter si le nom contient "signatory" (c'est un autre produit)
+  if (!whisky.mustContain && n.includes('signatory')) {
+    console.log(`  ↳ Rejeté (signatory trouvé dans "${name}" mais on veut la version normale)`);
+    return false;
+  }
+  return true;
 }
 
-// ── CARREFOUR ────────────────────────────────────────────────────────────────
+// ── CARREFOUR (Drive Lons-le-Saunier, cookie FRONTAL_STORE=840010) ───────────
 async function searchCarrefour(page, whisky) {
   const q = encodeURIComponent(whisky.query);
   const url = `https://www.carrefour.fr/s?q=${q}&lang=fr_FR`;
@@ -70,7 +91,7 @@ async function searchCarrefour(page, whisky) {
     });
 
     for (const r of results) {
-      if (!matchesBrand(r.name, whisky.brand)) continue;
+      if (!matchesBrand(r.name, whisky)) continue;
       let price = parsePrice(r.priceText);
       if (!price && r.perLitre) {
         const perL = parsePrice(r.perLitre);
@@ -89,7 +110,7 @@ async function searchCarrefour(page, whisky) {
   }
 }
 
-// ── INTERMARCHÉ ──────────────────────────────────────────────────────────────
+// ── INTERMARCHÉ (Morez 03737) ────────────────────────────────────────────────
 async function searchIntermarche(page, whisky) {
   const q = encodeURIComponent(whisky.query);
   const url = `https://www.intermarche.com/recherche?q=${q}`;
@@ -113,7 +134,7 @@ async function searchIntermarche(page, whisky) {
     });
 
     for (const r of results) {
-      if (!matchesBrand(r.name, whisky.brand)) continue;
+      if (!matchesBrand(r.name, whisky)) continue;
       const price = parsePrice(r.priceText);
       if (price) {
         console.log(`✅ ${whisky.name} @ Intermarché : ${price}€`);
@@ -152,7 +173,7 @@ async function searchCdiscount(page, whisky) {
     });
 
     for (const r of results) {
-      if (!matchesBrand(r.name, whisky.brand)) continue;
+      if (!matchesBrand(r.name, whisky)) continue;
       const price = parsePrice(r.priceText);
       if (price) {
         console.log(`✅ ${whisky.name} @ Cdiscount : ${price}€`);
@@ -177,7 +198,6 @@ async function searchLMDW(page, whisky) {
     try { await page.click('#onetrust-accept-btn-handler, [class*="cookie"] button', { timeout: 2000 }); } catch {}
 
     const results = await page.evaluate(() => {
-      // LMDW : grille de produits
       const cards = document.querySelectorAll('.product-item, [class*="product"], article, li[class*="item"]');
       return Array.from(cards).slice(0, 10).map(card => {
         const nameEl = card.querySelector('h2, h3, [class*="name"], [class*="title"], a');
@@ -192,7 +212,7 @@ async function searchLMDW(page, whisky) {
     });
 
     for (const r of results) {
-      if (!matchesBrand(r.name, whisky.brand)) continue;
+      if (!matchesBrand(r.name, whisky)) continue;
       const price = parsePrice(r.priceText);
       if (price) {
         console.log(`✅ ${whisky.name} @ LMDW : ${price}€`);
@@ -225,23 +245,19 @@ async function main() {
     viewport: { width: 1280, height: 900 },
   });
 
-  // ── Cookie Carrefour Drive Lons-le-Saunier (storeId 840010) ──────────────
+  // ── Cookie Drive Carrefour Lons-le-Saunier ──────────────────────────────
   await context.addCookies([{
-    name: 'FRONTAL_STORE',
-    value: '840010',
-    domain: '.carrefour.fr',
-    path: '/',
+    name: 'FRONTAL_STORE', value: '840010',
+    domain: '.carrefour.fr', path: '/',
   }]);
 
-  // ── Intermarché : sélectionner magasin Morez (03737) via cookie ───────────
-  // Pré-navigation pour setter le magasin
+  // ── Intermarché : initialiser magasin Morez (03737) ─────────────────────
   const itmPage = await context.newPage();
   try {
     await itmPage.goto('https://www.intermarche.com/magasins/03737/morez-39400/infos-pratiques',
       { waitUntil: 'domcontentloaded', timeout: 15000 });
     await itmPage.waitForTimeout(1500);
-    // Cliquer "Choisir ce magasin" si disponible
-    try { await itmPage.click('button:has-text("Choisir"), button:has-text("Sélectionner"), button:has-text("Mon magasin")', { timeout: 3000 }); } catch {}
+    try { await itmPage.click('button:has-text("Choisir"), button:has-text("Sélectionner")', { timeout: 3000 }); } catch {}
     console.log('✅ Magasin Intermarché Morez initialisé');
   } catch(e) { console.log('⚠️  Init ITM Morez:', e.message.substring(0,60)); }
   await itmPage.close();
@@ -266,7 +282,7 @@ async function main() {
       const result = await src.fn(page, whisky);
       if (result) {
         const existing = entry.prices.find(p => p.date === today && p.supermarket === src.name);
-        if (existing) existing.price = result.price;
+        if (existing) { existing.price = result.price; existing.url = result.url; }
         else entry.prices.push({ date: today, price: result.price, supermarket: src.name, url: result.url });
         updated++;
       }

@@ -192,20 +192,7 @@
       "region": "Islay",
       "ppm": 35,
       "abv": 46,
-      "prices": [
-        {
-          "date": "2026-03-06",
-          "price": 39.99,
-          "supermarket": "Carrefour",
-          "url": "https://www.carrefour.fr/p/whisky-ecossais-single-malt-12-ans-caol-ila-5000281016290"
-        },
-        {
-          "date": "2026-03-06",
-          "price": 60,
-          "supermarket": "Cdiscount",
-          "url": "https://www.cdiscount.com/search/10/caol%20ila%20signatory%20whisky.html"
-        }
-      ]
+      "prices": []
     },
     {
       "name": "Bunnahabhain Staoisha Signatory",
@@ -214,14 +201,7 @@
       "region": "Islay",
       "ppm": 40,
       "abv": 59.1,
-      "prices": [
-        {
-          "date": "2026-03-06",
-          "price": 75,
-          "supermarket": "Cdiscount",
-          "url": "https://www.cdiscount.com/search/10/bunnahabhain%20staoisha%20signatory%20whisky.html"
-        }
-      ]
+      "prices": []
     },
     {
       "name": "Laphroaig 10 ans Signatory",
@@ -230,14 +210,7 @@
       "region": "Islay",
       "ppm": 40,
       "abv": 46,
-      "prices": [
-        {
-          "date": "2026-03-06",
-          "price": 48.9,
-          "supermarket": "Cdiscount",
-          "url": "https://www.cdiscount.com/search/10/laphroaig%20signatory%20whisky.html"
-        }
-      ]
+      "prices": []
     },
     {
       "name": "Ardbeg Signatory",
@@ -246,14 +219,25 @@
       "region": "Islay",
       "ppm": 50,
       "abv": 46,
-      "prices": [
-        {
-          "date": "2026-03-06",
-          "price": 74.19,
-          "supermarket": "Cdiscount",
-          "url": "https://www.cdiscount.com/search/10/ardbeg%20signatory%20vintage%20whisky.html"
-        }
-      ]
+      "prices": []
+    },
+    {
+      "name": "Kilchoman Machir Bay",
+      "distillery": "Kilchoman",
+      "region": "Islay",
+      "age": null,
+      "ppm": 50,
+      "abv": 46,
+      "prices": []
+    },
+    {
+      "name": "Kilchoman Sanaig",
+      "distillery": "Kilchoman",
+      "region": "Islay",
+      "age": null,
+      "ppm": 50,
+      "abv": 46,
+      "prices": []
     }
   ]
 }
