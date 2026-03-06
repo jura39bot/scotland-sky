@@ -77,8 +77,32 @@ markers_js = "\n".join([
 rows = []
 for idx, w in enumerate(whiskies):
     bp = best_prices(w)
-    best_shop = min(bp, key=bp.get) if bp else "N/A"
-    best_price = f"{bp[best_shop]:.2f}€" if bp else "N/A"
+    # best_prices_with_url : pour chaque shop, prix min + URL associée
+    def best_with_url(w):
+        by_shop = {}
+        for p in w["prices"]:
+            shop = p["supermarket"]
+            if shop not in by_shop or p["price"] < by_shop[shop]["price"]:
+                by_shop[shop] = {"price": p["price"], "url": p.get("url", "")}
+        return by_shop
+
+    bpu = best_with_url(w)
+    best_shop = min(bpu, key=lambda s: bpu[s]["price"]) if bpu else None
+    best_price = f"{bpu[best_shop]['price']:.2f}€" if best_shop else "N/A"
+    best_url   = bpu[best_shop]["url"] if best_shop else ""
+
+    # Tous les liens disponibles (un par source)
+    all_links = ""
+    shop_icons = {"Carrefour": "🔵", "Intermarché": "🔴", "Cdiscount": "🟠", "LMDW": "🥃"}
+    for shop, info in sorted(bpu.items(), key=lambda x: x[1]["price"]):
+        icon = shop_icons.get(shop, "🔗")
+        price_str = f'{info["price"]:.2f}€'
+        if info["url"]:
+            title = f'{shop} — {price_str}'
+            all_links += f'<a href="{info["url"]}" target="_blank" style="text-decoration:none;margin-right:4px" title="{title}">{icon} {price_str}</a> '
+        else:
+            all_links += f'<span style="color:#666;margin-right:4px">{icon} {price_str}</span> '
+
     age_str = f"{w['age']} ans" if w.get("age") else "NAS"
     num = idx + 1
     color = COLORS[idx % len(COLORS)]
@@ -89,7 +113,8 @@ for idx, w in enumerate(whiskies):
         <td>{age_str}</td>
         <td>{w['ppm']} ppm</td>
         <td class="price">{best_price}</td>
-        <td>{best_shop}</td>
+        <td>{best_shop or 'N/A'}</td>
+        <td>{all_links if all_links else '<span style="color:#555">—</span>'}</td>
     </tr>""")
 
 # Graphique Chart.js — datasets
@@ -174,7 +199,7 @@ html = f"""<!DOCTYPE html>
   <table>
     <thead><tr>
       <th>#&nbsp; Whisky</th><th>Distillerie</th><th>Région</th>
-      <th>Âge</th><th>Tourbe</th><th>Prix min</th><th>Source</th>
+      <th>Âge</th><th>Tourbe</th><th>Prix min</th><th>Source</th><th>Commander</th>
     </tr></thead>
     <tbody>{''.join(rows)}</tbody>
   </table>
