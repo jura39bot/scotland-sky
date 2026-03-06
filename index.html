@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>🥃 Scotland Sky — Whiskies Tourbés</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; }
+  header { background: #16213e; padding: 1.5rem 2rem; border-bottom: 3px solid #e63946; }
+  header h1 { font-size: 2rem; } header p { color: #aaa; margin-top: .3rem; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+  h2 { color: #e9c46a; margin: 2rem 0 1rem; font-size: 1.4rem; border-left: 4px solid #e63946; padding-left: .8rem; }
+  #map { height: 450px; border-radius: 12px; margin-bottom: 2rem; border: 2px solid #e63946; }
+  table { width: 100%; border-collapse: collapse; background: #16213e; border-radius: 8px; overflow: hidden; }
+  th { background: #e63946; color: white; padding: .8rem; text-align: left; }
+  td { padding: .7rem .8rem; border-bottom: 1px solid #2a2a4e; }
+  tr:hover td { background: #2a2a4e; }
+  .price { font-weight: bold; color: #e9c46a; font-size: 1.1rem; }
+  .chart-box { background: #16213e; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+  footer { text-align: center; padding: 2rem; color: #666; font-size: .85rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🥃 Scotland Sky</h1>
+  <p>Tracker de prix des whiskies écossais tourbés — Carrefour &amp; Intermarché</p>
+  <p style="margin-top:.5rem;font-size:.85rem;color:#888">Mise à jour : 2026-03-06</p>
+</header>
+<div class="container">
+
+  <h2>🗺️ Carte des Distilleries</h2>
+  <div id="map"></div>
+
+  <h2>🛒 Prix les plus bas par whisky</h2>
+  <table>
+    <thead><tr>
+      <th>Whisky</th><th>Distillerie</th><th>Région</th>
+      <th>Âge</th><th>Tourbe</th><th>Prix min</th><th>Supermarché</th>
+    </tr></thead>
+    <tbody><tr>
+        <td><b>Ardbeg 10 ans</b></td>
+        <td>Ardbeg</td>
+        <td>Islay</td>
+        <td>10 ans</td>
+        <td>50 ppm</td>
+        <td class="price">44.90€</td>
+        <td>Carrefour</td>
+    </tr><tr>
+        <td><b>Lagavulin 16 ans</b></td>
+        <td>Lagavulin</td>
+        <td>Islay</td>
+        <td>16 ans</td>
+        <td>35 ppm</td>
+        <td class="price">79.90€</td>
+        <td>Carrefour</td>
+    </tr><tr>
+        <td><b>Lagavulin 8 ans</b></td>
+        <td>Lagavulin</td>
+        <td>Islay</td>
+        <td>8 ans</td>
+        <td>35 ppm</td>
+        <td class="price">49.90€</td>
+        <td>Carrefour</td>
+    </tr><tr>
+        <td><b>Laphroaig 10 ans</b></td>
+        <td>Laphroaig</td>
+        <td>Islay</td>
+        <td>10 ans</td>
+        <td>40 ppm</td>
+        <td class="price">38.50€</td>
+        <td>Intermarché</td>
+    </tr><tr>
+        <td><b>Caol Ila 12 ans</b></td>
+        <td>Caol Ila</td>
+        <td>Islay</td>
+        <td>12 ans</td>
+        <td>35 ppm</td>
+        <td class="price">47.90€</td>
+        <td>Carrefour</td>
+    </tr><tr>
+        <td><b>Bowmore 12 ans</b></td>
+        <td>Bowmore</td>
+        <td>Islay</td>
+        <td>12 ans</td>
+        <td>25 ppm</td>
+        <td class="price">36.50€</td>
+        <td>Intermarché</td>
+    </tr><tr>
+        <td><b>Big Peat</b></td>
+        <td>Douglas Laing (blend Islay)</td>
+        <td>Islay</td>
+        <td>NAS</td>
+        <td>55 ppm</td>
+        <td class="price">34.90€</td>
+        <td>Carrefour</td>
+    </tr><tr>
+        <td><b>Bunnahabhain 12 ans</b></td>
+        <td>Bunnahabhain</td>
+        <td>Islay</td>
+        <td>12 ans</td>
+        <td>2 ppm</td>
+        <td class="price">52.90€</td>
+        <td>Carrefour</td>
+    </tr><tr>
+        <td><b>Highland Park 12 ans</b></td>
+        <td>Highland Park</td>
+        <td>Orkney</td>
+        <td>12 ans</td>
+        <td>20 ppm</td>
+        <td class="price">41.50€</td>
+        <td>Intermarché</td>
+    </tr><tr>
+        <td><b>Talisker 10 ans</b></td>
+        <td>Talisker</td>
+        <td>Skye</td>
+        <td>10 ans</td>
+        <td>25 ppm</td>
+        <td class="price">43.90€</td>
+        <td>Intermarché</td>
+    </tr></tbody>
+  </table>
+
+  <h2>📈 Évolution des prix</h2>
+  <div class="chart-box">
+    <canvas id="priceChart" height="400"></canvas>
+  </div>
+
+</div>
+<footer>
+  🍷 Tracker créé depuis Morez (Jura) — <a href="https://github.com/jura39bot/scotland-sky" style="color:#e63946">GitHub</a>
+</footer>
+
+<script>
+var map = L.map('map').setView([55.75, -6.3], 9);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap'
+}).addTo(map);
+L.circleMarker([55.64, -6.1079], {
+        radius: 16,
+        color: '#e63946',
+        fillColor: '#e63946',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Ardbeg</b><br>Tourbe : 50 ppm');
+L.circleMarker([55.6358, -6.1264], {
+        radius: 13,
+        color: '#2a9d8f',
+        fillColor: '#2a9d8f',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Lagavulin</b><br>Tourbe : 35 ppm');
+L.circleMarker([55.6383, -6.1478], {
+        radius: 14,
+        color: '#e9c46a',
+        fillColor: '#e9c46a',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Laphroaig</b><br>Tourbe : 40 ppm');
+L.circleMarker([55.7567, -6.2893], {
+        radius: 11,
+        color: '#f4a261',
+        fillColor: '#f4a261',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Bowmore</b><br>Tourbe : 25 ppm');
+L.circleMarker([55.8644, -6.1074], {
+        radius: 13,
+        color: '#264653',
+        fillColor: '#264653',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Caol Ila</b><br>Tourbe : 35 ppm');
+L.circleMarker([55.8956, -6.1214], {
+        radius: 8,
+        color: '#6a4c93',
+        fillColor: '#6a4c93',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Bunnahabhain</b><br>Tourbe : 2 ppm');
+L.circleMarker([55.7603, -6.3606], {
+        radius: 8,
+        color: '#1982c4',
+        fillColor: '#1982c4',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Bruichladdich</b><br>Tourbe : 0 ppm');
+L.circleMarker([55.7381, -6.3783], {
+        radius: 14,
+        color: '#8ac926',
+        fillColor: '#8ac926',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Port Charlotte</b><br>Tourbe : 40 ppm');
+L.circleMarker([55.7839, -6.4536], {
+        radius: 16,
+        color: '#ff595e',
+        fillColor: '#ff595e',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Kilchoman</b><br>Tourbe : 50 ppm');
+L.circleMarker([55.9064, -6.1183], {
+        radius: 8,
+        color: '#6a994e',
+        fillColor: '#6a994e',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Ardnahoe</b><br>Tourbe : 0 ppm');
+L.circleMarker([58.9853, -2.9604], {
+        radius: 10,
+        color: '#a8dadc',
+        fillColor: '#a8dadc',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Highland Park</b><br>Tourbe : 20 ppm');
+L.circleMarker([57.2998, -6.3577], {
+        radius: 11,
+        color: '#457b9d',
+        fillColor: '#457b9d',
+        fillOpacity: 0.8,
+        weight: 2
+    }).addTo(map).bindPopup('<b>Talisker</b><br>Tourbe : 25 ppm');
+
+// Zoom sur les îles d'Écosse
+var bounds = L.latLngBounds([55.6, -6.6], [56.1, -5.9]);
+map.fitBounds(bounds);
+
+// Chart.js
+var ctx = document.getElementById('priceChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ["2026-03-06"],
+    datasets: [{
+        label: 'Ardbeg 10 ans',
+        data: [44.9],
+        borderColor: '#e63946',
+        backgroundColor: '#e6394622',
+        tension: 0.3,
+        pointRadius: 5
+    },{
+        label: 'Lagavulin 16 ans',
+        data: [79.9],
+        borderColor: '#2a9d8f',
+        backgroundColor: '#2a9d8f22',
+        tension: 0.3,
+        pointRadius: 5
+    },{
+        label: 'Lagavulin 8 ans',
+        data: [49.9],
+        borderColor: '#e9c46a',
+        backgroundColor: '#e9c46a22',
+        tension: 0.3,
+        pointRadius: 5
+    },{
+        label: 'Laphroaig 10 ans',
+        data: [38.5],
+        borderColor: '#f4a261',
+        backgroundColor: '#f4a26122',
+        tension: 0.3,
+        pointRadius: 5
+    },{
+        label: 'Caol Ila 12 ans',
+        data: [47.9],
+        borderColor: '#264653',
+        backgroundColor: '#26465322',
+        tension: 0.3,
+        pointRadius: 5
+    },{
+        label: 'Bowmore 12 ans',
+        data: [36.5],
+        borderColor: '#6a4c93',
+        backgroundColor: '#6a4c9322',
+        tension: 0.3,
+        pointRadius: 5
+    },{
+        label: 'Big Peat',
+        data: [34.9],
+        borderColor: '#1982c4',
+        backgroundColor: '#1982c422',
+        tension: 0.3,
+        pointRadius: 5
+    },{
+        label: 'Bunnahabhain 12 ans',
+        data: [52.9],
+        borderColor: '#8ac926',
+        backgroundColor: '#8ac92622',
+        tension: 0.3,
+        pointRadius: 5
+    },{
+        label: 'Highland Park 12 ans',
+        data: [41.5],
+        borderColor: '#ff595e',
+        backgroundColor: '#ff595e22',
+        tension: 0.3,
+        pointRadius: 5
+    },{
+        label: 'Talisker 10 ans',
+        data: [43.9],
+        borderColor: '#6a994e',
+        backgroundColor: '#6a994e22',
+        tension: 0.3,
+        pointRadius: 5
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { labels: { color: '#eee' } },
+      title: { display: true, text: 'Prix les plus bas / semaine (€)', color: '#e9c46a', font: { size: 16 } }
+    },
+    scales: {
+      x: { ticks: { color: '#aaa' }, grid: { color: '#2a2a4e' } },
+      y: { ticks: { color: '#aaa', callback: v => v + '€' }, grid: { color: '#2a2a4e' } }
+    }
+  }
+});
+</script>
+</body>
+</html>

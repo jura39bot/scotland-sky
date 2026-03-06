@@ -1,0 +1,121 @@
+{
+  "last_updated": "2026-03-06",
+  "whiskies": [
+    {
+      "name": "Ardbeg 10 ans",
+      "distillery": "Ardbeg",
+      "age": 10,
+      "region": "Islay",
+      "ppm": 50,
+      "abv": 46,
+      "prices": [
+        {"date": "2026-03-06", "price": 44.90, "supermarket": "Carrefour", "url": "https://www.carrefour.fr/p/whisky-ardbeg-10-ans-46-3002302622321"},
+        {"date": "2026-03-06", "price": 46.50, "supermarket": "Intermarché", "url": "https://www.intermarche.com"}
+      ]
+    },
+    {
+      "name": "Lagavulin 16 ans",
+      "distillery": "Lagavulin",
+      "age": 16,
+      "region": "Islay",
+      "ppm": 35,
+      "abv": 43,
+      "prices": [
+        {"date": "2026-03-06", "price": 79.90, "supermarket": "Carrefour", "url": "https://www.carrefour.fr/p/whisky-islay-single-malt-16-ans-d-age-lagavulin-5000281005409"},
+        {"date": "2026-03-06", "price": 82.00, "supermarket": "Intermarché", "url": "https://www.intermarche.com"}
+      ]
+    },
+    {
+      "name": "Lagavulin 8 ans",
+      "distillery": "Lagavulin",
+      "age": 8,
+      "region": "Islay",
+      "ppm": 35,
+      "abv": 48,
+      "prices": [
+        {"date": "2026-03-06", "price": 49.90, "supermarket": "Carrefour", "url": "https://www.carrefour.fr/p/whisky-single-malt-scotch-8-ans-480-lagavulin-5000281050553"}
+      ]
+    },
+    {
+      "name": "Laphroaig 10 ans",
+      "distillery": "Laphroaig",
+      "age": 10,
+      "region": "Islay",
+      "ppm": 40,
+      "abv": 40,
+      "prices": [
+        {"date": "2026-03-06", "price": 39.90, "supermarket": "Carrefour", "url": "https://www.carrefour.fr/p/whisky-islay-single-malt-scotch-10-ans-40-laphroaig-5010019000163"},
+        {"date": "2026-03-06", "price": 38.50, "supermarket": "Intermarché", "url": "https://www.intermarche.com/produit/islay-single-malt-scotch-whisky-select/5010019637604"}
+      ]
+    },
+    {
+      "name": "Caol Ila 12 ans",
+      "distillery": "Caol Ila",
+      "age": 12,
+      "region": "Islay",
+      "ppm": 35,
+      "abv": 43,
+      "prices": [
+        {"date": "2026-03-06", "price": 47.90, "supermarket": "Carrefour", "url": "https://www.carrefour.fr/p/whisky-ecossais-single-malt-12-ans-caol-ila-5000281016290"}
+      ]
+    },
+    {
+      "name": "Bowmore 12 ans",
+      "distillery": "Bowmore",
+      "age": 12,
+      "region": "Islay",
+      "ppm": 25,
+      "abv": 40,
+      "prices": [
+        {"date": "2026-03-06", "price": 37.90, "supermarket": "Carrefour", "url": "https://www.carrefour.fr"},
+        {"date": "2026-03-06", "price": 36.50, "supermarket": "Intermarché", "url": "https://www.intermarche.com"}
+      ]
+    },
+    {
+      "name": "Big Peat",
+      "distillery": "Douglas Laing (blend Islay)",
+      "age": null,
+      "region": "Islay",
+      "ppm": 55,
+      "abv": 46,
+      "prices": [
+        {"date": "2026-03-06", "price": 34.90, "supermarket": "Carrefour", "url": "https://www.carrefour.fr/p/whisky-blended-big-peat-5014218776256"}
+      ]
+    },
+    {
+      "name": "Bunnahabhain 12 ans",
+      "distillery": "Bunnahabhain",
+      "age": 12,
+      "region": "Islay",
+      "ppm": 2,
+      "abv": 46.3,
+      "prices": [
+        {"date": "2026-03-06", "price": 52.90, "supermarket": "Carrefour", "url": "https://www.carrefour.fr"}
+      ]
+    },
+    {
+      "name": "Highland Park 12 ans",
+      "distillery": "Highland Park",
+      "age": 12,
+      "region": "Orkney",
+      "ppm": 20,
+      "abv": 40,
+      "prices": [
+        {"date": "2026-03-06", "price": 42.90, "supermarket": "Carrefour", "url": "https://www.carrefour.fr"},
+        {"date": "2026-03-06", "price": 41.50, "supermarket": "Intermarché", "url": "https://www.intermarche.com"}
+      ]
+    },
+    {
+      "name": "Talisker 10 ans",
+      "distillery": "Talisker",
+      "age": 10,
+      "region": "Skye",
+      "ppm": 25,
+      "abv": 45.8,
+      "prices": [
+        {"date": "2026-03-06", "price": 44.90, "supermarket": "Carrefour", "url": "https://www.carrefour.fr"},
+        {"date": "2026-03-06", "price": 43.90, "supermarket": "Intermarché", "url": "https://www.intermarche.com"}
+      ]
+    }
+  ]
+}
