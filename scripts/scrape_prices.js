@@ -50,17 +50,27 @@ function parsePrice(text) {
 function matchesBrand(name, whisky) {
   if (!name) return false;
   const n = name.toLowerCase();
-  // Marque présente ?
+  // La marque doit être présente
   if (!whisky.brand.toLowerCase().split(' ').every(w => n.includes(w))) return false;
-  // Whisky Signatory : le mot "signatory" doit être dans le nom retourné
+  // mustContain (ex: "signatory") doit être présent si spécifié
   if (whisky.mustContain && !n.includes(whisky.mustContain.toLowerCase())) {
     console.log(`  ↳ Rejeté (pas "${whisky.mustContain}" dans "${name}")`);
     return false;
   }
-  // Whisky normal : rejeter si le nom contient "signatory" (c'est un autre produit)
+  // Whisky normal : rejeter si le nom contient "signatory"
   if (!whisky.mustContain && n.includes('signatory')) {
     console.log(`  ↳ Rejeté (signatory trouvé dans "${name}" mais on veut la version normale)`);
     return false;
+  }
+  // Si le query contient un âge (nombre), le nom du produit doit aussi le contenir
+  // Ex: "ardbeg 10 ans" → le produit doit contenir "10"
+  const ageMatch = whisky.query.match(/\b(\d+)\s*ans\b/);
+  if (ageMatch) {
+    const age = ageMatch[1];
+    if (!n.includes(age)) {
+      console.log(`  ↳ Rejeté (âge ${age} absent de "${name}")`);
+      return false;
+    }
   }
   return true;
 }
