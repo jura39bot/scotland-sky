@@ -54,8 +54,8 @@
         <td>Islay</td>
         <td>10 ans</td>
         <td>50 ppm</td>
-        <td class="price">N/A</td>
-        <td>N/A</td>
+        <td class="price">67.99€</td>
+        <td>Cdiscount</td>
     </tr><tr>
         <td><span style="display:inline-block;min-width:22px;height:22px;border-radius:50%;background:#2a9d8f;color:#fff;text-align:center;line-height:22px;font-weight:bold;font-size:.8rem;margin-right:6px">2</span><b>Lagavulin 16 ans</b></td>
         <td>Lagavulin</td>
@@ -78,8 +78,8 @@
         <td>Islay</td>
         <td>10 ans</td>
         <td>40 ppm</td>
-        <td class="price">N/A</td>
-        <td>N/A</td>
+        <td class="price">63.73€</td>
+        <td>Cdiscount</td>
     </tr><tr>
         <td><span style="display:inline-block;min-width:22px;height:22px;border-radius:50%;background:#264653;color:#fff;text-align:center;line-height:22px;font-weight:bold;font-size:.8rem;margin-right:6px">5</span><b>Caol Ila 12 ans</b></td>
         <td>Caol Ila</td>
@@ -94,8 +94,8 @@
         <td>Islay</td>
         <td>12 ans</td>
         <td>25 ppm</td>
-        <td class="price">22.68€</td>
-        <td>Carrefour</td>
+        <td class="price">56.10€</td>
+        <td>Cdiscount</td>
     </tr><tr>
         <td><span style="display:inline-block;min-width:22px;height:22px;border-radius:50%;background:#1982c4;color:#fff;text-align:center;line-height:22px;font-weight:bold;font-size:.8rem;margin-right:6px">7</span><b>Big Peat</b></td>
         <td>Douglas Laing (blend Islay)</td>
@@ -110,32 +110,32 @@
         <td>Islay</td>
         <td>12 ans</td>
         <td>2 ppm</td>
-        <td class="price">22.68€</td>
-        <td>Carrefour</td>
+        <td class="price">63.90€</td>
+        <td>Cdiscount</td>
     </tr><tr>
         <td><span style="display:inline-block;min-width:22px;height:22px;border-radius:50%;background:#ff595e;color:#fff;text-align:center;line-height:22px;font-weight:bold;font-size:.8rem;margin-right:6px">9</span><b>Highland Park 12 ans</b></td>
         <td>Highland Park</td>
         <td>Orkney</td>
         <td>12 ans</td>
         <td>20 ppm</td>
-        <td class="price">22.68€</td>
-        <td>Carrefour</td>
+        <td class="price">63.00€</td>
+        <td>Cdiscount</td>
     </tr><tr>
         <td><span style="display:inline-block;min-width:22px;height:22px;border-radius:50%;background:#6a994e;color:#fff;text-align:center;line-height:22px;font-weight:bold;font-size:.8rem;margin-right:6px">10</span><b>Talisker 10 ans</b></td>
         <td>Talisker</td>
         <td>Skye</td>
         <td>10 ans</td>
         <td>25 ppm</td>
-        <td class="price">N/A</td>
-        <td>N/A</td>
+        <td class="price">66.35€</td>
+        <td>Cdiscount</td>
     </tr><tr>
         <td><span style="display:inline-block;min-width:22px;height:22px;border-radius:50%;background:#a8dadc;color:#fff;text-align:center;line-height:22px;font-weight:bold;font-size:.8rem;margin-right:6px">11</span><b>Caol Ila 12 ans Signatory</b></td>
         <td>Caol Ila (Signatory)</td>
         <td>Islay</td>
         <td>12 ans</td>
         <td>35 ppm</td>
-        <td class="price">N/A</td>
-        <td>N/A</td>
+        <td class="price">40.05€</td>
+        <td>Carrefour</td>
     </tr><tr>
         <td><span style="display:inline-block;min-width:22px;height:22px;border-radius:50%;background:#457b9d;color:#fff;text-align:center;line-height:22px;font-weight:bold;font-size:.8rem;margin-right:6px">12</span><b>Bunnahabhain Staoisha Signatory</b></td>
         <td>Bunnahabhain (Signatory)</td>
@@ -150,8 +150,8 @@
         <td>Islay</td>
         <td>10 ans</td>
         <td>40 ppm</td>
-        <td class="price">N/A</td>
-        <td>N/A</td>
+        <td class="price">48.90€</td>
+        <td>Cdiscount</td>
     </tr><tr>
         <td><span style="display:inline-block;min-width:22px;height:22px;border-radius:50%;background:#52b788;color:#fff;text-align:center;line-height:22px;font-weight:bold;font-size:.8rem;margin-right:6px">14</span><b>Ardbeg Signatory</b></td>
         <td>Ardbeg (Signatory)</td>
@@ -299,6 +299,19 @@ new Chart(ctx, {
   data: {
     labels: ["2026-03-06"],
     datasets: [{
+        label: '1. Ardbeg 10 ans',
+        data: [67.99],
+        borderColor: '#e63946',
+        backgroundColor: '#e6394633',
+        borderDash: [],
+        tension: 0.3,
+        pointRadius: 13,
+        pointHoverRadius: 15,
+        pointBackgroundColor: '#e63946',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointLabel: 1
+    },{
         label: '2. Lagavulin 16 ans',
         data: [59.09],
         borderColor: '#2a9d8f',
@@ -325,6 +338,19 @@ new Chart(ctx, {
         pointBorderWidth: 2,
         pointLabel: 3
     },{
+        label: '4. Laphroaig 10 ans',
+        data: [63.73],
+        borderColor: '#f4a261',
+        backgroundColor: '#f4a26133',
+        borderDash: [5, 2],
+        tension: 0.3,
+        pointRadius: 13,
+        pointHoverRadius: 15,
+        pointBackgroundColor: '#f4a261',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointLabel: 4
+    },{
         label: '5. Caol Ila 12 ans',
         data: [40.05],
         borderColor: '#264653',
@@ -339,7 +365,7 @@ new Chart(ctx, {
         pointLabel: 5
     },{
         label: '6. Bowmore 12 ans',
-        data: [22.68],
+        data: [56.1],
         borderColor: '#6a4c93',
         backgroundColor: '#6a4c9333',
         borderDash: [2, 2],
@@ -365,7 +391,7 @@ new Chart(ctx, {
         pointLabel: 7
     },{
         label: '8. Bunnahabhain 12 ans',
-        data: [22.68],
+        data: [63.9],
         borderColor: '#8ac926',
         backgroundColor: '#8ac92633',
         borderDash: [5, 10],
@@ -378,7 +404,7 @@ new Chart(ctx, {
         pointLabel: 8
     },{
         label: '9. Highland Park 12 ans',
-        data: [22.68],
+        data: [63],
         borderColor: '#ff595e',
         backgroundColor: '#ff595e33',
         borderDash: [3, 3],
@@ -389,6 +415,45 @@ new Chart(ctx, {
         pointBorderColor: '#fff',
         pointBorderWidth: 2,
         pointLabel: 9
+    },{
+        label: '10. Talisker 10 ans',
+        data: [66.35],
+        borderColor: '#6a994e',
+        backgroundColor: '#6a994e33',
+        borderDash: [8, 3, 3, 3],
+        tension: 0.3,
+        pointRadius: 13,
+        pointHoverRadius: 15,
+        pointBackgroundColor: '#6a994e',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointLabel: 10
+    },{
+        label: '11. Caol Ila 12 ans Signatory',
+        data: [40.05],
+        borderColor: '#a8dadc',
+        backgroundColor: '#a8dadc33',
+        borderDash: [],
+        tension: 0.3,
+        pointRadius: 13,
+        pointHoverRadius: 15,
+        pointBackgroundColor: '#a8dadc',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointLabel: 11
+    },{
+        label: '13. Laphroaig 10 ans Signatory',
+        data: [48.9],
+        borderColor: '#e76f51',
+        backgroundColor: '#e76f5133',
+        borderDash: [10, 5],
+        tension: 0.3,
+        pointRadius: 13,
+        pointHoverRadius: 15,
+        pointBackgroundColor: '#e76f51',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointLabel: 13
     }]
   },
   options: {

@@ -8,7 +8,14 @@
       "region": "Islay",
       "ppm": 50,
       "abv": 46,
-      "prices": []
+      "prices": [
+        {
+          "date": "2026-03-06",
+          "price": 67.99,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/ardbeg%2010%20ans%20whisky.html"
+        }
+      ]
     },
     {
       "name": "Lagavulin 16 ans",
@@ -23,6 +30,12 @@
           "price": 59.09,
           "supermarket": "Carrefour",
           "url": "https://www.carrefour.fr/p/whisky-ecossais-single-malt-8-ans-lagavulin-5000281050553"
+        },
+        {
+          "date": "2026-03-06",
+          "price": 105.65,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/lagavulin%2016%20ans%20whisky.html"
         }
       ]
     },
@@ -39,6 +52,12 @@
           "price": 59.09,
           "supermarket": "Carrefour",
           "url": "https://www.carrefour.fr/p/whisky-ecossais-single-malt-8-ans-lagavulin-5000281050553"
+        },
+        {
+          "date": "2026-03-06",
+          "price": 59.41,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/lagavulin%208%20ans%20whisky.html"
         }
       ]
     },
@@ -49,7 +68,14 @@
       "region": "Islay",
       "ppm": 40,
       "abv": 40,
-      "prices": []
+      "prices": [
+        {
+          "date": "2026-03-06",
+          "price": 63.73,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/laphroaig%2010%20ans%20whisky.html"
+        }
+      ]
     },
     {
       "name": "Caol Ila 12 ans",
@@ -64,6 +90,12 @@
           "price": 40.05,
           "supermarket": "Carrefour",
           "url": "https://www.carrefour.fr/p/whisky-ecossais-single-malt-12-ans-caol-ila-5000281016290"
+        },
+        {
+          "date": "2026-03-06",
+          "price": 60,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/caol%20ila%2012%20ans%20whisky.html"
         }
       ]
     },
@@ -77,9 +109,9 @@
       "prices": [
         {
           "date": "2026-03-06",
-          "price": 22.68,
-          "supermarket": "Carrefour",
-          "url": "https://www.carrefour.fr/s?q=bowmore%2012%20ans&shiftPage=0&lang=fr_FR"
+          "price": 56.1,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/bowmore%2012%20ans%20whisky.html"
         }
       ]
     },
@@ -96,6 +128,12 @@
           "price": 50.85,
           "supermarket": "Carrefour",
           "url": "https://www.carrefour.fr/p/whisky-blended-big-peat-5014218776256"
+        },
+        {
+          "date": "2026-03-06",
+          "price": 59.9,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/big%20peat%20whisky%20whisky.html"
         }
       ]
     },
@@ -109,9 +147,9 @@
       "prices": [
         {
           "date": "2026-03-06",
-          "price": 22.68,
-          "supermarket": "Carrefour",
-          "url": "https://www.carrefour.fr/s?q=bunnahabhain%2012%20ans&shiftPage=0&lang=fr_FR"
+          "price": 63.9,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/bunnahabhain%2012%20ans%20whisky.html"
         }
       ]
     },
@@ -125,9 +163,9 @@
       "prices": [
         {
           "date": "2026-03-06",
-          "price": 22.68,
-          "supermarket": "Carrefour",
-          "url": "https://www.carrefour.fr/s?q=highland%20park%2012%20ans&shiftPage=0&lang=fr_FR"
+          "price": 63,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/highland%20park%2012%20ans%20whisky.html"
         }
       ]
     },
@@ -138,7 +176,14 @@
       "region": "Skye",
       "ppm": 25,
       "abv": 45.8,
-      "prices": []
+      "prices": [
+        {
+          "date": "2026-03-06",
+          "price": 66.35,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/talisker%2010%20ans%20whisky.html"
+        }
+      ]
     },
     {
       "name": "Caol Ila 12 ans Signatory",
@@ -147,7 +192,20 @@
       "region": "Islay",
       "ppm": 35,
       "abv": 46,
-      "prices": []
+      "prices": [
+        {
+          "date": "2026-03-06",
+          "price": 40.05,
+          "supermarket": "Carrefour",
+          "url": "https://www.carrefour.fr/p/whisky-ecossais-single-malt-12-ans-caol-ila-5000281016290"
+        },
+        {
+          "date": "2026-03-06",
+          "price": 60,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/caol%20ila%20signatory%20whisky.html"
+        }
+      ]
     },
     {
       "name": "Bunnahabhain Staoisha Signatory",
@@ -165,7 +223,14 @@
       "region": "Islay",
       "ppm": 40,
       "abv": 46,
-      "prices": []
+      "prices": [
+        {
+          "date": "2026-03-06",
+          "price": 48.9,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/laphroaig%20signatory%20whisky.html"
+        }
+      ]
     },
     {
       "name": "Ardbeg Signatory",
