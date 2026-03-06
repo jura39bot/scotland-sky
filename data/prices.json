@@ -220,24 +220,6 @@
       "ppm": 50,
       "abv": 46,
       "prices": []
-    },
-    {
-      "name": "Kilchoman Machir Bay",
-      "distillery": "Kilchoman",
-      "region": "Islay",
-      "age": null,
-      "ppm": 50,
-      "abv": 46,
-      "prices": []
-    },
-    {
-      "name": "Kilchoman Sanaig",
-      "distillery": "Kilchoman",
-      "region": "Islay",
-      "age": null,
-      "ppm": 50,
-      "abv": 46,
-      "prices": []
     }
   ]
 }

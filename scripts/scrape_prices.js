@@ -188,7 +188,47 @@ async function searchCdiscount(page, whisky) {
   }
 }
 
-// ── LA MAISON DU WHISKY ──────────────────────────────────────────────────────
+// ── JARDIN VOUVRILLON ────────────────────────────────────────────────────────
+async function searchJardinVouvrillon(page, whisky) {
+  const q = encodeURIComponent(whisky.query);
+  const url = `https://www.jardinvouvrillon.fr/recherche?controller=search&s=${q}`;
+  try {
+    await page.goto(url, { waitUntil: 'networkidle', timeout: 25000 });
+    await page.waitForTimeout(2000);
+    try { await page.click('#onetrust-accept-btn-handler, .btn-primary[data-role="popin-close"]', { timeout: 2000 }); } catch {}
+
+    const results = await page.evaluate(() => {
+      // PrestaShop standard selectors
+      const cards = document.querySelectorAll('.product-miniature, article.product-miniature, .product-container');
+      return Array.from(cards).slice(0, 10).map(card => {
+        const nameEl = card.querySelector('.product-title, h2, h3, .h3');
+        const priceEl = card.querySelector('.price, .product-price, span[itemprop="price"]');
+        const linkEl = card.querySelector('a[href]');
+        return {
+          name: nameEl?.textContent?.trim() || '',
+          priceText: priceEl?.textContent?.trim() || '',
+          url: linkEl?.href || '',
+        };
+      });
+    });
+
+    for (const r of results) {
+      if (!matchesBrand(r.name, whisky)) continue;
+      const price = parsePrice(r.priceText);
+      if (price) {
+        console.log(`✅ ${whisky.name} @ Jardin Vouvrillon : ${price}€`);
+        return { price, url: r.url || url };
+      }
+    }
+    console.log(`⚠️  ${whisky.name} @ Jardin Vouvrillon : non trouvé`);
+    return null;
+  } catch (e) {
+    console.log(`❌ ${whisky.name} @ Jardin Vouvrillon : ${e.message.split('\n')[0]}`);
+    return null;
+  }
+}
+
+// ── LA MAISON DU WHISKY (whisky.fr) ─────────────────────────────────────────
 async function searchLMDW(page, whisky) {
   const q = encodeURIComponent(whisky.query);
   const url = `https://www.whisky.fr/recherche.html?q=${q}`;
@@ -268,10 +308,11 @@ async function main() {
   });
 
   const SOURCES = [
-    { name: 'Carrefour',   fn: searchCarrefour },
-    { name: 'Intermarché', fn: searchIntermarche },
-    { name: 'Cdiscount',   fn: searchCdiscount },
-    { name: 'LMDW',        fn: searchLMDW },
+    { name: 'Carrefour',         fn: searchCarrefour },
+    { name: 'Intermarché',       fn: searchIntermarche },
+    { name: 'Cdiscount',         fn: searchCdiscount },
+    { name: 'Jardin Vouvrillon', fn: searchJardinVouvrillon },
+    { name: 'LMDW',              fn: searchLMDW },
   ];
 
   for (const whisky of WHISKIES) {

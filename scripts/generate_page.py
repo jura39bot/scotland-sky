@@ -93,7 +93,7 @@ for idx, w in enumerate(whiskies):
 
     # Tous les liens disponibles (un par source)
     all_links = ""
-    shop_icons = {"Carrefour": "🔵", "Intermarché": "🔴", "Cdiscount": "🟠", "LMDW": "🥃"}
+    shop_icons = {"Carrefour": "🔵", "Intermarché": "🔴", "Cdiscount": "🟠", "Jardin Vouvrillon": "🟢", "LMDW": "🥃"}
     for shop, info in sorted(bpu.items(), key=lambda x: x[1]["price"]):
         icon = shop_icons.get(shop, "🔗")
         price_str = f'{info["price"]:.2f}€'
@@ -188,7 +188,7 @@ html = f"""<!DOCTYPE html>
 <header>
   <h1>🥃 Scotland Sky</h1>
   <p>Tracker de prix — whiskies écossais tourbés</p>
-  <p style="font-size:.82rem;color:#888;margin-top:.3rem">Sources : Carrefour Drive Lons-le-Saunier 🔵 · Intermarché Morez 🔴 · Cdiscount 🟠 · LMDW 🥃 &nbsp;|&nbsp; MAJ : {last_updated}</p>
+  <p style="font-size:.82rem;color:#888;margin-top:.3rem">Sources : Carrefour Drive Lons-le-Saunier 🔵 · Intermarché Morez 🔴 · Cdiscount 🟠 · Jardin Vouvrillon 🟢 · whisky.fr (LMDW) 🥃 &nbsp;|&nbsp; MAJ : {last_updated}</p>
 </header>
 <div class="container">
 
