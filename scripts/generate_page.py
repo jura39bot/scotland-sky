@@ -188,7 +188,7 @@ html = f"""<!DOCTYPE html>
 <header>
   <h1>🥃 Scotland Sky</h1>
   <p>Tracker de prix — whiskies écossais tourbés</p>
-  <p style="font-size:.82rem;color:#888;margin-top:.3rem">Sources : Carrefour · Intermarché · Cdiscount · La Maison du Whisky &nbsp;|&nbsp; MAJ : {last_updated}</p>
+  <p style="font-size:.82rem;color:#888;margin-top:.3rem">Sources : Carrefour Drive Lons-le-Saunier 🔵 · Intermarché Morez 🔴 · Cdiscount 🟠 · LMDW 🥃 &nbsp;|&nbsp; MAJ : {last_updated}</p>
 </header>
 <div class="container">
 

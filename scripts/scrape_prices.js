@@ -225,6 +225,27 @@ async function main() {
     viewport: { width: 1280, height: 900 },
   });
 
+  // ── Cookie Carrefour Drive Lons-le-Saunier (storeId 840010) ──────────────
+  await context.addCookies([{
+    name: 'FRONTAL_STORE',
+    value: '840010',
+    domain: '.carrefour.fr',
+    path: '/',
+  }]);
+
+  // ── Intermarché : sélectionner magasin Morez (03737) via cookie ───────────
+  // Pré-navigation pour setter le magasin
+  const itmPage = await context.newPage();
+  try {
+    await itmPage.goto('https://www.intermarche.com/magasins/03737/morez-39400/infos-pratiques',
+      { waitUntil: 'domcontentloaded', timeout: 15000 });
+    await itmPage.waitForTimeout(1500);
+    // Cliquer "Choisir ce magasin" si disponible
+    try { await itmPage.click('button:has-text("Choisir"), button:has-text("Sélectionner"), button:has-text("Mon magasin")', { timeout: 3000 }); } catch {}
+    console.log('✅ Magasin Intermarché Morez initialisé');
+  } catch(e) { console.log('⚠️  Init ITM Morez:', e.message.substring(0,60)); }
+  await itmPage.close();
+
   const page = await context.newPage();
   await page.addInitScript(() => {
     Object.defineProperty(navigator, 'webdriver', { get: () => undefined });

@@ -87,7 +87,7 @@
       "prices": [
         {
           "date": "2026-03-06",
-          "price": 40.05,
+          "price": 39.99,
           "supermarket": "Carrefour",
           "url": "https://www.carrefour.fr/p/whisky-ecossais-single-malt-12-ans-caol-ila-5000281016290"
         },
@@ -125,7 +125,7 @@
       "prices": [
         {
           "date": "2026-03-06",
-          "price": 50.85,
+          "price": 47.85,
           "supermarket": "Carrefour",
           "url": "https://www.carrefour.fr/p/whisky-blended-big-peat-5014218776256"
         },
@@ -195,7 +195,7 @@
       "prices": [
         {
           "date": "2026-03-06",
-          "price": 40.05,
+          "price": 39.99,
           "supermarket": "Carrefour",
           "url": "https://www.carrefour.fr/p/whisky-ecossais-single-malt-12-ans-caol-ila-5000281016290"
         },
@@ -214,7 +214,14 @@
       "region": "Islay",
       "ppm": 40,
       "abv": 59.1,
-      "prices": []
+      "prices": [
+        {
+          "date": "2026-03-06",
+          "price": 75,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/bunnahabhain%20staoisha%20signatory%20whisky.html"
+        }
+      ]
     },
     {
       "name": "Laphroaig 10 ans Signatory",
@@ -239,7 +246,14 @@
       "region": "Islay",
       "ppm": 50,
       "abv": 46,
-      "prices": []
+      "prices": [
+        {
+          "date": "2026-03-06",
+          "price": 74.19,
+          "supermarket": "Cdiscount",
+          "url": "https://www.cdiscount.com/search/10/ardbeg%20signatory%20vintage%20whisky.html"
+        }
+      ]
     }
   ]
 }
