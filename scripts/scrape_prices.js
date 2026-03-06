@@ -326,8 +326,11 @@ async function main() {
   ];
 
   for (const whisky of WHISKIES) {
-    const entry = data.whiskies.find(w => w.name === whisky.name);
-    if (!entry) { console.log(`⚠️  Entrée "${whisky.name}" absente du JSON`); continue; }
+    let entry = data.whiskies.find(w => w.name === whisky.name);
+    if (!entry) {
+      console.log(`⚠️  Entrée "${whisky.name}" absente du JSON — ignorée (ne pas écraser le JSON manuellement)`);
+      continue;
+    }
 
     for (const src of SOURCES) {
       const result = await src.fn(page, whisky);

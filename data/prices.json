@@ -14,6 +14,12 @@
           "price": 67.99,
           "supermarket": "Cdiscount",
           "url": "https://www.cdiscount.com/search/10/ardbeg%2010%20ans%20whisky.html"
+        },
+        {
+          "date": "2026-03-06",
+          "price": 200,
+          "supermarket": "Jardin Vouvrillon",
+          "url": "https://www.jardinvouvrillon.fr/whisky-ecosse/81292-ardbeg-25-ans-2022-batch-3.html"
         }
       ]
     },
@@ -217,6 +223,24 @@
       "distillery": "Ardbeg (Signatory)",
       "age": null,
       "region": "Islay",
+      "ppm": 50,
+      "abv": 46,
+      "prices": []
+    },
+    {
+      "name": "Kilchoman Machir Bay",
+      "distillery": "Kilchoman",
+      "region": "Islay",
+      "age": null,
+      "ppm": 50,
+      "abv": 46,
+      "prices": []
+    },
+    {
+      "name": "Kilchoman Sanaig",
+      "distillery": "Kilchoman",
+      "region": "Islay",
+      "age": null,
       "ppm": 50,
       "abv": 46,
       "prices": []
