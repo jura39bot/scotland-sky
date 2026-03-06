@@ -1,0 +1,24 @@
+{
+  "name": "scotland-sky",
+  "version": "1.0.0",
+  "description": "> Veille prix des **whiskies \u00e9cossais tourb\u00e9s** dans les supermarch\u00e9s fran\u00e7ais en ligne   > Carte interactive des distilleries d'Islay (\u00c9cosse)   > **Mise \u00e0 jour automatique chaque lundi**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jura39bot/scotland-sky.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jura39bot/scotland-sky/issues"
+  },
+  "homepage": "https://github.com/jura39bot/scotland-sky#readme",
+  "dependencies": {
+    "playwright-core": "^1.58.2"
+  }
+}
