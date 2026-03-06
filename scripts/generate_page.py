@@ -83,22 +83,28 @@ for w in whiskies:
         <td>{best_shop}</td>
     </tr>""")
 
+DASH_PATTERNS = [[], [5,5], [10,5], [5,2], [10,3,2,3], [2,2], [15,5], [5,10], [3,3], [8,3,3,3]]
+
 # Graphique Chart.js
 datasets = []
 for i, w in enumerate(whiskies):
     ts = time_series(w)
     if not ts:
         continue
-    labels = list(ts.keys())
     values = list(ts.values())
     color = COLORS[i % len(COLORS)]
+    num = i + 1
     datasets.append(f"""{{
-        label: '{w["name"]}',
+        label: '{num}. {w["name"]}',
         data: {values},
         borderColor: '{color}',
         backgroundColor: '{color}22',
+        borderDash: {DASH_PATTERNS[i % len(DASH_PATTERNS)]},
         tension: 0.3,
-        pointRadius: 5
+        pointRadius: 7,
+        pointBackgroundColor: '{color}',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
     }}""")
 
 all_labels = sorted(set(
@@ -128,6 +134,10 @@ html = f"""<!DOCTYPE html>
   tr:hover td {{ background: #2a2a4e; }}
   .price {{ font-weight: bold; color: #e9c46a; font-size: 1.1rem; }}
   .chart-box {{ background: #16213e; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }}
+  .chart-wrap {{ display: flex; gap: 1.5rem; align-items: flex-start; }}
+  .chart-legend {{ min-width: 200px; background: #16213e; border-radius: 10px; padding: 1rem; }}
+  .chart-legend li {{ list-style: none; padding: .4rem .3rem; font-size: .92rem; border-bottom: 1px solid #2a2a4e; display: flex; align-items: center; gap: .5rem; }}
+  .legend-num {{ display: inline-block; min-width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-weight: bold; font-size: .85rem; color: #fff; flex-shrink: 0; }}
   footer {{ text-align: center; padding: 2rem; color: #666; font-size: .85rem; }}
 </style>
 </head>
@@ -152,8 +162,16 @@ html = f"""<!DOCTYPE html>
   </table>
 
   <h2>📈 Évolution des prix</h2>
-  <div class="chart-box">
-    <canvas id="priceChart" height="400"></canvas>
+  <div class="chart-wrap">
+    <div class="chart-box" style="flex:1">
+      <canvas id="priceChart" height="400"></canvas>
+    </div>
+    <ul class="chart-legend">
+      {''.join([
+        f'<li><span class="legend-num" style="background:{COLORS[i % len(COLORS)]}">{i+1}</span> {w["name"]}</li>'
+        for i, w in enumerate(whiskies)
+      ])}
+    </ul>
   </div>
 
 </div>

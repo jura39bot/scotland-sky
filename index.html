@@ -21,6 +21,10 @@
   tr:hover td { background: #2a2a4e; }
   .price { font-weight: bold; color: #e9c46a; font-size: 1.1rem; }
   .chart-box { background: #16213e; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+  .chart-wrap { display: flex; gap: 1.5rem; align-items: flex-start; }
+  .chart-legend { min-width: 200px; background: #16213e; border-radius: 10px; padding: 1rem; }
+  .chart-legend li { list-style: none; padding: .4rem .3rem; font-size: .92rem; border-bottom: 1px solid #2a2a4e; display: flex; align-items: center; gap: .5rem; }
+  .legend-num { display: inline-block; min-width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-weight: bold; font-size: .85rem; color: #fff; flex-shrink: 0; }
   footer { text-align: center; padding: 2rem; color: #666; font-size: .85rem; }
 </style>
 </head>
@@ -125,8 +129,13 @@
   </table>
 
   <h2>📈 Évolution des prix</h2>
-  <div class="chart-box">
-    <canvas id="priceChart" height="400"></canvas>
+  <div class="chart-wrap">
+    <div class="chart-box" style="flex:1">
+      <canvas id="priceChart" height="400"></canvas>
+    </div>
+    <ul class="chart-legend">
+      <li><span class="legend-num" style="background:#e63946">1</span> Ardbeg 10 ans</li><li><span class="legend-num" style="background:#2a9d8f">2</span> Lagavulin 16 ans</li><li><span class="legend-num" style="background:#e9c46a">3</span> Lagavulin 8 ans</li><li><span class="legend-num" style="background:#f4a261">4</span> Laphroaig 10 ans</li><li><span class="legend-num" style="background:#264653">5</span> Caol Ila 12 ans</li><li><span class="legend-num" style="background:#6a4c93">6</span> Bowmore 12 ans</li><li><span class="legend-num" style="background:#1982c4">7</span> Big Peat</li><li><span class="legend-num" style="background:#8ac926">8</span> Bunnahabhain 12 ans</li><li><span class="legend-num" style="background:#ff595e">9</span> Highland Park 12 ans</li><li><span class="legend-num" style="background:#6a994e">10</span> Talisker 10 ans</li>
+    </ul>
   </div>
 
 </div>
@@ -235,75 +244,115 @@ new Chart(ctx, {
   data: {
     labels: ["2026-03-06"],
     datasets: [{
-        label: 'Ardbeg 10 ans',
+        label: '1. Ardbeg 10 ans',
         data: [44.9],
         borderColor: '#e63946',
         backgroundColor: '#e6394622',
+        borderDash: [],
         tension: 0.3,
-        pointRadius: 5
+        pointRadius: 7,
+        pointBackgroundColor: '#e63946',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
     },{
-        label: 'Lagavulin 16 ans',
+        label: '2. Lagavulin 16 ans',
         data: [79.9],
         borderColor: '#2a9d8f',
         backgroundColor: '#2a9d8f22',
+        borderDash: [5, 5],
         tension: 0.3,
-        pointRadius: 5
+        pointRadius: 7,
+        pointBackgroundColor: '#2a9d8f',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
     },{
-        label: 'Lagavulin 8 ans',
+        label: '3. Lagavulin 8 ans',
         data: [49.9],
         borderColor: '#e9c46a',
         backgroundColor: '#e9c46a22',
+        borderDash: [10, 5],
         tension: 0.3,
-        pointRadius: 5
+        pointRadius: 7,
+        pointBackgroundColor: '#e9c46a',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
     },{
-        label: 'Laphroaig 10 ans',
+        label: '4. Laphroaig 10 ans',
         data: [38.5],
         borderColor: '#f4a261',
         backgroundColor: '#f4a26122',
+        borderDash: [5, 2],
         tension: 0.3,
-        pointRadius: 5
+        pointRadius: 7,
+        pointBackgroundColor: '#f4a261',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
     },{
-        label: 'Caol Ila 12 ans',
+        label: '5. Caol Ila 12 ans',
         data: [47.9],
         borderColor: '#264653',
         backgroundColor: '#26465322',
+        borderDash: [10, 3, 2, 3],
         tension: 0.3,
-        pointRadius: 5
+        pointRadius: 7,
+        pointBackgroundColor: '#264653',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
     },{
-        label: 'Bowmore 12 ans',
+        label: '6. Bowmore 12 ans',
         data: [36.5],
         borderColor: '#6a4c93',
         backgroundColor: '#6a4c9322',
+        borderDash: [2, 2],
         tension: 0.3,
-        pointRadius: 5
+        pointRadius: 7,
+        pointBackgroundColor: '#6a4c93',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
     },{
-        label: 'Big Peat',
+        label: '7. Big Peat',
         data: [34.9],
         borderColor: '#1982c4',
         backgroundColor: '#1982c422',
+        borderDash: [15, 5],
         tension: 0.3,
-        pointRadius: 5
+        pointRadius: 7,
+        pointBackgroundColor: '#1982c4',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
     },{
-        label: 'Bunnahabhain 12 ans',
+        label: '8. Bunnahabhain 12 ans',
         data: [52.9],
         borderColor: '#8ac926',
         backgroundColor: '#8ac92622',
+        borderDash: [5, 10],
         tension: 0.3,
-        pointRadius: 5
+        pointRadius: 7,
+        pointBackgroundColor: '#8ac926',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
     },{
-        label: 'Highland Park 12 ans',
+        label: '9. Highland Park 12 ans',
         data: [41.5],
         borderColor: '#ff595e',
         backgroundColor: '#ff595e22',
+        borderDash: [3, 3],
         tension: 0.3,
-        pointRadius: 5
+        pointRadius: 7,
+        pointBackgroundColor: '#ff595e',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
     },{
-        label: 'Talisker 10 ans',
+        label: '10. Talisker 10 ans',
         data: [43.9],
         borderColor: '#6a994e',
         backgroundColor: '#6a994e22',
+        borderDash: [8, 3, 3, 3],
         tension: 0.3,
-        pointRadius: 5
+        pointRadius: 7,
+        pointBackgroundColor: '#6a994e',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
     }]
   },
   options: {
