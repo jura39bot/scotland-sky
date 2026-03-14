@@ -32,6 +32,18 @@
           "price": 57.9,
           "supermarket": "Nicolas",
           "url": "https://www.nicolas.com/en/LIQUORS/WHISKY/Ardbeg-10-Years-Old/p/264221.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 57.9,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/WHISKY/Ardbeg-10-Years-Old/p/264221.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 49.9,
+          "supermarket": "Carrefour",
+          "url": "https://www.carrefour.fr/p/whisky-ardbeg-10-ans-46-3002302622321"
         }
       ]
     },
@@ -72,6 +84,18 @@
           "price": 105.0,
           "supermarket": "Nicolas",
           "url": "https://www.nicolas.com/en/LIQUORS/WHISKY/WHISKY-MALTS/LAGAVULIN-16-ANS/p/144491.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 105.0,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/WHISKY/WHISKY-MALTS/LAGAVULIN-16-ANS/p/144491.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 24.9,
+          "supermarket": "Carrefour",
+          "url": "https://www.carrefour.fr/p/whisky-islay-single-malt-16-ans-d-age-lagavulin-5000281005409"
         }
       ]
     },
@@ -128,6 +152,12 @@
           "price": 60.9,
           "supermarket": "Nicolas",
           "url": "https://www.nicolas.com/en/LIQUORS/WHISKY/WHISKY-MALTS/LAPHROAIG-QUARTER-CASK/p/447623.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 60.9,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/WHISKY/WHISKY-MALTS/LAPHROAIG-QUARTER-CASK/p/447623.html"
         }
       ]
     },
@@ -178,6 +208,12 @@
           "price": 46,
           "supermarket": "Jardin Vouvrillon",
           "url": "https://www.jardinvouvrillon.fr/whisky-ecosse/82240-bowmore-12-ans.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 49.9,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/BOWMORE-12-ANS-ISLAY-SINGLE-MALT/p/502784.html"
         },
         {
           "date": "2026-03-14",
@@ -262,6 +298,12 @@
           "price": 39.2,
           "supermarket": "Nicolas",
           "url": "https://www.nicolas.com/en/LIQUORS/HIGHLAND-PARK-12-ANS-/p/492452.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 39.2,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/HIGHLAND-PARK-12-ANS-/p/492452.html"
         }
       ]
     },
@@ -284,6 +326,12 @@
           "price": 52.9,
           "supermarket": "Jardin Vouvrillon",
           "url": "https://www.jardinvouvrillon.fr/whisky-ecosse/8473-talisker-10-ans.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 52.0,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/TALISKER-10-ANS-/p/144462.html"
         },
         {
           "date": "2026-03-14",
@@ -393,6 +441,12 @@
           "price": 49.9,
           "supermarket": "Nicolas",
           "url": "https://www.nicolas.com/en/LIQUORS/CAOL-ILA-MOCH/p/466323.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 49.9,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/CAOL-ILA-MOCH/p/466323.html"
         }
       ]
     },
@@ -404,6 +458,12 @@
       "ppm": 2,
       "abv": 46.3,
       "prices": [
+        {
+          "date": "2026-03-14",
+          "price": 47.2,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/BUNNAHABHAIN-STIUIREADAIR-/p/486178.html"
+        },
         {
           "date": "2026-03-14",
           "price": 47.2,

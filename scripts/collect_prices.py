@@ -35,6 +35,8 @@ WHISKIES = [
         "abv": 46,
         "sources": {
             "Nicolas": "https://www.nicolas.com/en/LIQUORS/WHISKY/Ardbeg-10-Years-Old/p/264221.html",
+            "Carrefour": "https://www.carrefour.fr/p/whisky-ardbeg-10-ans-46-3002302622321",
+            "Intermarché": "https://www.intermarche.com/produit/ardbeg-10-ans/3002302622321",
         }
     },
     {
@@ -46,6 +48,7 @@ WHISKIES = [
         "abv": 43,
         "sources": {
             "Nicolas": "https://www.nicolas.com/en/LIQUORS/WHISKY/WHISKY-MALTS/LAGAVULIN-16-ANS/p/144491.html",
+            "Carrefour": "https://www.carrefour.fr/p/whisky-islay-single-malt-16-ans-d-age-lagavulin-5000281005409",
         }
     },
     {
@@ -117,6 +120,48 @@ WHISKIES = [
 ]
 
 
+import urllib.request as _urllib_request
+
+CF_ACCOUNT_ID = "eb67118c10264d065b55e2e9bac17e67"
+CF_API_TOKEN = "VS_P4-RyDtCBfkgilAPGE6jnD9nyvtgtyft1uyYo"
+CF_BASE = f"https://api.cloudflare.com/client/v4/accounts/{CF_ACCOUNT_ID}/browser-rendering"
+CF_HEADERS = {"Authorization": f"Bearer {CF_API_TOKEN}", "Content-Type": "application/json"}
+CF_SELECTORS = ["[data-testid*='price']", ".product-price__amount", "[class*='price']"]
+
+
+def _cf_scrape(url: str) -> list:
+    """Scrape via Cloudflare Browser Rendering."""
+    import json as _json
+    data = _json.dumps({"url": url, "elements": [{"selector": s} for s in CF_SELECTORS], "gotoOptions": {"waitUntil": "networkidle2"}}).encode()
+    req = _urllib_request.Request(f"{CF_BASE}/scrape", data=data, headers=CF_HEADERS, method="POST")
+    with _urllib_request.urlopen(req, timeout=45) as r:
+        return _json.loads(r.read()).get("result", [])
+
+
+def _extract_price(text: str) -> float | None:
+    m = re.search(r'(\d{2,3})[,\.\s](\d{2})', text)
+    if m:
+        p = float(f"{m.group(1)}.{m.group(2)}")
+        if 20 < p < 500:
+            return p
+    return None
+
+
+def fetch_price_cloudflare(url: str) -> float | None:
+    """Extrait le prix via Cloudflare Browser Rendering (contourne anti-bot)."""
+    try:
+        items = _cf_scrape(url)
+        for item in items:
+            for r in item.get("results", []):
+                p = _extract_price(r.get("text", "") or r.get("html", ""))
+                if p:
+                    return p
+    except Exception as e:
+        log = __import__('logging').getLogger(__name__)
+        log.warning(f"CF scrape error {url}: {e}")
+    return None
+
+
 def fetch_price_nicolas(url: str) -> float | None:
     """Extrait le prix depuis une page Nicolas.com."""
     try:
@@ -124,15 +169,12 @@ def fetch_price_nicolas(url: str) -> float | None:
         if r.status_code != 200:
             return None
         soup = BeautifulSoup(r.text, "html.parser")
-        # Nicolas : span avec itemprop="price" ou class contenant "price"
         price_tag = soup.find("span", {"itemprop": "price"})
         if not price_tag:
             price_tag = soup.find("span", class_=re.compile("price", re.I))
         if price_tag:
             content = price_tag.get("content") or price_tag.get_text(strip=True)
-            # Nettoyer : "57,€90" → "57.90"
             content = re.sub(r'[^\d,\.]', '', content.replace("€", ","))
-            # Format "57,90" ou "57€90"
             m = re.search(r'(\d{2,3})[,\.](\d{2})', content)
             if m:
                 return float(f"{m.group(1)}.{m.group(2)}")
@@ -143,6 +185,8 @@ def fetch_price_nicolas(url: str) -> float | None:
 
 FETCHERS = {
     "Nicolas": fetch_price_nicolas,
+    "Carrefour": fetch_price_cloudflare,
+    "Intermarché": fetch_price_cloudflare,
 }
 
 
@@ -172,7 +216,7 @@ def collect():
             if not fetcher:
                 continue
             price = fetcher(url)
-            time.sleep(2)  # politesse
+            time.sleep(5)  # politesse (CF rate limit)
             if price:
                 entry["prices"].append({
                     "date": today,
