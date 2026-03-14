@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-06",
+  "last_updated": "2026-03-14",
   "whiskies": [
     {
       "name": "Ardbeg 10 ans",
@@ -20,6 +20,18 @@
           "price": 51.5,
           "supermarket": "Jardin Vouvrillon",
           "url": "https://www.jardinvouvrillon.fr/whisky-ecosse/794-ardbeg-10-ans.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 57.9,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/WHISKY/Ardbeg-10-Years-Old/p/264221.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 57.9,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/WHISKY/Ardbeg-10-Years-Old/p/264221.html"
         }
       ]
     },
@@ -48,6 +60,18 @@
           "price": 89.9,
           "supermarket": "Jardin Vouvrillon",
           "url": "https://www.jardinvouvrillon.fr/whisky-ecosse/227-lagavulin-16-ans.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 105.0,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/WHISKY/WHISKY-MALTS/LAGAVULIN-16-ANS/p/144491.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 105.0,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/WHISKY/WHISKY-MALTS/LAGAVULIN-16-ANS/p/144491.html"
         }
       ]
     },
@@ -98,6 +122,12 @@
           "price": 95,
           "supermarket": "Jardin Vouvrillon",
           "url": "https://www.jardinvouvrillon.fr/whisky-ecosse/82052-laphroaig-10-ans-cask-strength-batch-17-583.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 60.9,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/WHISKY/WHISKY-MALTS/LAPHROAIG-QUARTER-CASK/p/447623.html"
         }
       ]
     },
@@ -148,6 +178,12 @@
           "price": 46,
           "supermarket": "Jardin Vouvrillon",
           "url": "https://www.jardinvouvrillon.fr/whisky-ecosse/82240-bowmore-12-ans.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 49.9,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/BOWMORE-12-ANS-ISLAY-SINGLE-MALT/p/502784.html"
         }
       ]
     },
@@ -220,6 +256,12 @@
           "price": 48,
           "supermarket": "Jardin Vouvrillon",
           "url": "https://www.jardinvouvrillon.fr/whisky-ecosse/2424-highland-park-12-ans.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 39.2,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/HIGHLAND-PARK-12-ANS-/p/492452.html"
         }
       ]
     },
@@ -242,6 +284,12 @@
           "price": 52.9,
           "supermarket": "Jardin Vouvrillon",
           "url": "https://www.jardinvouvrillon.fr/whisky-ecosse/8473-talisker-10-ans.html"
+        },
+        {
+          "date": "2026-03-14",
+          "price": 52.0,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/TALISKER-10-ANS-/p/144462.html"
         }
       ]
     },
@@ -329,6 +377,38 @@
           "price": 69.9,
           "supermarket": "Jardin Vouvrillon",
           "url": "https://www.jardinvouvrillon.fr/whisky-islay/927-kilchoman-sanaig.html"
+        }
+      ]
+    },
+    {
+      "name": "Caol Ila Moch",
+      "distillery": "Caol Ila",
+      "age": null,
+      "region": "Islay",
+      "ppm": 35,
+      "abv": 43,
+      "prices": [
+        {
+          "date": "2026-03-14",
+          "price": 49.9,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/CAOL-ILA-MOCH/p/466323.html"
+        }
+      ]
+    },
+    {
+      "name": "Bunnahabhain Stiuireadair",
+      "distillery": "Bunnahabhain",
+      "age": null,
+      "region": "Islay",
+      "ppm": 2,
+      "abv": 46.3,
+      "prices": [
+        {
+          "date": "2026-03-14",
+          "price": 47.2,
+          "supermarket": "Nicolas",
+          "url": "https://www.nicolas.com/en/LIQUORS/BUNNAHABHAIN-STIUIREADAIR-/p/486178.html"
         }
       ]
     }

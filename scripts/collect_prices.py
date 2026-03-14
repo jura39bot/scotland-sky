@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 scotland-sky — Collecte des prix des whiskies tourbés écossais
-Sources : Carrefour, Intermarché
+Sources : Nicolas, Système U, La Maison du Whisky
 Fréquence : hebdomadaire (GitHub Actions, chaque lundi 6h)
 """
 
@@ -24,7 +24,7 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
 
-# Liste des whiskies à tracker avec leurs URLs par supermarché
+# Liste des whiskies à tracker avec leurs URLs par caviste
 WHISKIES = [
     {
         "name": "Ardbeg 10 ans",
@@ -34,8 +34,7 @@ WHISKIES = [
         "ppm": 50,
         "abv": 46,
         "sources": {
-            "Carrefour": "https://www.carrefour.fr/p/whisky-ardbeg-10-ans-46-3002302622321",
-            "Intermarché": "https://www.intermarche.com/produit/ardbeg-10-ans/3002302622321",
+            "Nicolas": "https://www.nicolas.com/en/LIQUORS/WHISKY/Ardbeg-10-Years-Old/p/264221.html",
         }
     },
     {
@@ -46,18 +45,7 @@ WHISKIES = [
         "ppm": 35,
         "abv": 43,
         "sources": {
-            "Carrefour": "https://www.carrefour.fr/p/whisky-islay-single-malt-16-ans-d-age-lagavulin-5000281005409",
-        }
-    },
-    {
-        "name": "Lagavulin 8 ans",
-        "distillery": "Lagavulin",
-        "age": 8,
-        "region": "Islay",
-        "ppm": 35,
-        "abv": 48,
-        "sources": {
-            "Carrefour": "https://www.carrefour.fr/p/whisky-single-malt-scotch-8-ans-480-lagavulin-5000281050553",
+            "Nicolas": "https://www.nicolas.com/en/LIQUORS/WHISKY/WHISKY-MALTS/LAGAVULIN-16-ANS/p/144491.html",
         }
     },
     {
@@ -68,19 +56,18 @@ WHISKIES = [
         "ppm": 40,
         "abv": 40,
         "sources": {
-            "Carrefour": "https://www.carrefour.fr/p/whisky-islay-single-malt-scotch-10-ans-40-laphroaig-5010019000163",
-            "Intermarché": "https://www.intermarche.com/produit/islay-single-malt-scotch-whisky-select/5010019637604",
+            "Nicolas": "https://www.nicolas.com/en/LIQUORS/WHISKY/WHISKY-MALTS/LAPHROAIG-QUARTER-CASK/p/447623.html",
         }
     },
     {
-        "name": "Caol Ila 12 ans",
+        "name": "Caol Ila Moch",
         "distillery": "Caol Ila",
-        "age": 12,
+        "age": None,
         "region": "Islay",
         "ppm": 35,
         "abv": 43,
         "sources": {
-            "Carrefour": "https://www.carrefour.fr/p/whisky-ecossais-single-malt-12-ans-caol-ila-5000281016290",
+            "Nicolas": "https://www.nicolas.com/en/LIQUORS/CAOL-ILA-MOCH/p/466323.html",
         }
     },
     {
@@ -91,19 +78,7 @@ WHISKIES = [
         "ppm": 25,
         "abv": 40,
         "sources": {
-            "Carrefour": "https://www.carrefour.fr/p/whisky-ecossais-single-malt-12-ans-bowmore",
-            "Intermarché": "https://www.intermarche.com/produit/bowmore-12-ans",
-        }
-    },
-    {
-        "name": "Big Peat",
-        "distillery": "Douglas Laing (blend Islay)",
-        "age": None,
-        "region": "Islay",
-        "ppm": 55,
-        "abv": 46,
-        "sources": {
-            "Carrefour": "https://www.carrefour.fr/p/whisky-blended-big-peat-5014218776256",
+            "Nicolas": "https://www.nicolas.com/en/LIQUORS/BOWMORE-12-ANS-ISLAY-SINGLE-MALT/p/502784.html",
         }
     },
     {
@@ -114,8 +89,7 @@ WHISKIES = [
         "ppm": 20,
         "abv": 40,
         "sources": {
-            "Carrefour": "https://www.carrefour.fr/p/whisky-highland-park-12-ans",
-            "Intermarché": "https://www.intermarche.com/produit/highland-park-12-ans",
+            "Nicolas": "https://www.nicolas.com/en/LIQUORS/HIGHLAND-PARK-12-ANS-/p/492452.html",
         }
     },
     {
@@ -126,66 +100,49 @@ WHISKIES = [
         "ppm": 25,
         "abv": 45.8,
         "sources": {
-            "Carrefour": "https://www.carrefour.fr/p/whisky-talisker-10-ans",
-            "Intermarché": "https://www.intermarche.com/produit/talisker-10-ans",
+            "Nicolas": "https://www.nicolas.com/en/LIQUORS/TALISKER-10-ANS-/p/144462.html",
         }
     },
     {
-        "name": "Bunnahabhain 12 ans",
+        "name": "Bunnahabhain Stiuireadair",
         "distillery": "Bunnahabhain",
-        "age": 12,
+        "age": None,
         "region": "Islay",
         "ppm": 2,
         "abv": 46.3,
         "sources": {
-            "Carrefour": "https://www.carrefour.fr/p/whisky-bunnahabhain-12-ans",
+            "Nicolas": "https://www.nicolas.com/en/LIQUORS/BUNNAHABHAIN-STIUIREADAIR-/p/486178.html",
         }
     },
 ]
 
 
-def fetch_price_carrefour(url: str) -> float | None:
-    """Tente d'extraire le prix depuis une page Carrefour."""
+def fetch_price_nicolas(url: str) -> float | None:
+    """Extrait le prix depuis une page Nicolas.com."""
     try:
         r = requests.get(url, headers=HEADERS, timeout=15)
         if r.status_code != 200:
             return None
         soup = BeautifulSoup(r.text, "html.parser")
-        # Carrefour : balise <span> avec attribut data-testid contenant "price"
-        price_tag = soup.find("span", {"data-testid": re.compile("price", re.I)})
+        # Nicolas : span avec itemprop="price" ou class contenant "price"
+        price_tag = soup.find("span", {"itemprop": "price"})
         if not price_tag:
-            # Fallback : chercher le pattern de prix (ex: "44,90 €")
-            text = soup.get_text()
-            m = re.search(r'(\d{2,3}[,\.]\d{2})\s*€', text)
-            if m:
-                return float(m.group(1).replace(",", "."))
-        else:
-            return float(price_tag.get_text(strip=True).replace(",", ".").replace("€", "").strip())
-    except Exception:
-        pass
-    return None
-
-
-def fetch_price_intermarche(url: str) -> float | None:
-    """Tente d'extraire le prix depuis une page Intermarché."""
-    try:
-        r = requests.get(url, headers=HEADERS, timeout=15)
-        if r.status_code != 200:
-            return None
-        soup = BeautifulSoup(r.text, "html.parser")
-        price_tag = soup.find("span", class_=re.compile("price", re.I))
+            price_tag = soup.find("span", class_=re.compile("price", re.I))
         if price_tag:
-            m = re.search(r'(\d{2,3}[,\.]\d{2})', price_tag.get_text())
+            content = price_tag.get("content") or price_tag.get_text(strip=True)
+            # Nettoyer : "57,€90" → "57.90"
+            content = re.sub(r'[^\d,\.]', '', content.replace("€", ","))
+            # Format "57,90" ou "57€90"
+            m = re.search(r'(\d{2,3})[,\.](\d{2})', content)
             if m:
-                return float(m.group(1).replace(",", "."))
+                return float(f"{m.group(1)}.{m.group(2)}")
     except Exception:
         pass
     return None
 
 
 FETCHERS = {
-    "Carrefour": fetch_price_carrefour,
-    "Intermarché": fetch_price_intermarche,
+    "Nicolas": fetch_price_nicolas,
 }
 
 
